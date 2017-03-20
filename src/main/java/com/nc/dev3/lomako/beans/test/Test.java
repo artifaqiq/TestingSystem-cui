@@ -12,16 +12,23 @@ import java.util.List;
  */
 public class Test implements Serializable {
 
+    public static int numberOfEntities = 0;
+
     private static final long serialVersionUID = -5965469173441798469L;
+
     private String name;
     private String description;
     private List<Task> tasks;
     private ResultCalculationStrategy resultCalculationStrategy;
     private GregorianCalendar createdDate = new GregorianCalendar();
 
-    public Test() { }
+    public Test() {
+        Test.numberOfEntities++;
+    }
 
     public Test(String name, String description, List<Task> tasks, ResultCalculationStrategy strategy) {
+        Test.numberOfEntities++;
+
         this.name = name;
         this.description = description;
         this.tasks = tasks;
