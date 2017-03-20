@@ -1,9 +1,10 @@
-package com.nc.dev3.lomako.beans.answer;
+package com.nc.dev3.lomako.utils;
 
 /**
  * Created by arturlomako on 3/18/17.
  */
 public class AnswerResult {
+
     private int countCorrectAnswersTotal;
     private int countCorrectAnswersUser;
 
