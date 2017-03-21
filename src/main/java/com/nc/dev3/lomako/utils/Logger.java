@@ -2,22 +2,19 @@ package com.nc.dev3.lomako.utils;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
  * Created by arturlomako on 3/19/17.
  */
 public final class Logger {
+
     private static Logger instance = new Logger();
     private File file = new File("log.txt");
-
 
     private Logger() {
         if(!file.exists()) {
             try {
-
-
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -25,10 +22,6 @@ public final class Logger {
         }
     }
 
-    /**
-     * Writes log in file
-     * @param exception - the entity of Throwable
-     */
     public void log(final Throwable exception){
         final StringWriter errors = new StringWriter();
         exception.printStackTrace(new PrintWriter(errors));
@@ -43,10 +36,6 @@ public final class Logger {
         }
     }
 
-    /**
-     * Writes log in file
-     * @param message - string
-     */
     public void log(final String message){
         try(PrintWriter printwriter = new PrintWriter(new BufferedWriter(new FileWriter(file, true)))){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
