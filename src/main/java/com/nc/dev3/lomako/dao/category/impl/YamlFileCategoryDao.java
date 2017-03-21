@@ -4,8 +4,8 @@ import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.nc.dev3.lomako.beans.test.Test;
 import com.nc.dev3.lomako.beans.answer.AnswerOption;
 import com.nc.dev3.lomako.beans.category.Category;
-import com.nc.dev3.lomako.beans.strategy.ScaledResultCalculatingStrategy;
-import com.nc.dev3.lomako.beans.strategy.StrictResultCalculatingStrategy;
+import com.nc.dev3.lomako.dao.exceptions.NoFindEntityException;
+import com.nc.dev3.lomako.enums.ResultCalculationStrategyWays;
 import com.nc.dev3.lomako.beans.task.Task;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
@@ -35,8 +35,7 @@ public final class YamlFileCategoryDao implements Dao<Category> {
         YAML_CONFIG.put(Test.class, "test");
         YAML_CONFIG.put(Task.class, "task");
         YAML_CONFIG.put(AnswerOption.class, "option");
-        YAML_CONFIG.put(ScaledResultCalculatingStrategy.class, "scaled");
-        YAML_CONFIG.put(StrictResultCalculatingStrategy.class, "strict");
+        YAML_CONFIG.put(ResultCalculationStrategyWays.class, "strategy");
         YAML_CONFIG.put(GregorianCalendar.class, "date");
 
     }
@@ -67,9 +66,8 @@ public final class YamlFileCategoryDao implements Dao<Category> {
         config.setClassTag(YAML_CONFIG.get(Test.class), Test.class);
         config.setClassTag(YAML_CONFIG.get(Task.class), Task.class);
         config.setClassTag(YAML_CONFIG.get(AnswerOption.class), AnswerOption.class);
-        config.setClassTag(YAML_CONFIG.get(ScaledResultCalculatingStrategy.class), ScaledResultCalculatingStrategy.class);
-        config.setClassTag(YAML_CONFIG.get(StrictResultCalculatingStrategy.class), StrictResultCalculatingStrategy.class);
         config.setClassTag(YAML_CONFIG.get(Category.class), Category.class);
+        config.setClassTag(YAML_CONFIG.get(ResultCalculationStrategyWays.class), ResultCalculationStrategyWays.class);
         config.setClassTag(YAML_CONFIG.get(GregorianCalendar.class), GregorianCalendar.class);
     }
 
@@ -129,23 +127,23 @@ public final class YamlFileCategoryDao implements Dao<Category> {
     }
 
     @Override
-    public void deleteById(int id) throws NoSuchElementException {
+    public void deleteById(int id) throws NoFindEntityException {
         List<Category> categories = findAll();
 
         if (id < 0 || id >= categories.size()) {
-            throw new NoSuchElementException("Category with id = " + id + " doesn't exists");
+            throw new NoFindEntityException("Category with id = " + id + " doesn't exists");
         }
         categories.remove(id);
         saveAll(categories);
     }
 
     @Override
-    public Category update(Category category) {
+    public Category update(Category category) throws NoFindEntityException{
         List<Category> all = findAll();
         int index = (Collections.binarySearch(all, category));
 
         if (index < 0) {
-            throw new NoSuchElementException("Category (" + category.toString() + ") doesn't find");
+            throw new NoFindEntityException("Category (" + category.toString() + ") doesn't find");
         }
         all.set(index, category);
         saveAll(all);
