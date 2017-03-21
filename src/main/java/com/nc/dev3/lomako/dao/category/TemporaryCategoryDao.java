@@ -1,0 +1,81 @@
+package com.nc.dev3.lomako.dao.category;
+
+import com.nc.dev3.lomako.beans.category.Category;
+import com.nc.dev3.lomako.comparator.category.CategoryByNameComparator;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+/**
+ * Created by arturlomako on 3/18/17.
+ */
+public final class TemporaryCategoryDao implements CategoryDao {
+
+    private static volatile CategoryDao instance;
+    private List<Category> categories = new ArrayList<>();
+
+    private TemporaryCategoryDao() {
+    }
+
+    @Override
+    public Category save(Category category) {
+        categories.add((Category) category);
+        Collections.sort(categories);
+        return category;
+    }
+
+    @Override
+    public Category findByName(String name) {
+
+        List<Category> categories = findAll();
+        int index = Collections.binarySearch(categories, new Category(name, null));
+        if (index < 0) {
+            return null;
+        }
+        return categories.get(index);
+    }
+
+    @Override
+    public boolean isNameAlreadyExists(String name) {
+        return findByName(name) != null;
+    }
+
+    @Override
+    public List<Category> findAll() {
+        return categories;
+    }
+
+    @Override
+    public void deleteById(int id) throws NoSuchElementException {
+        if (id < 0 || id >= categories.size()) {
+            throw new NoSuchElementException("Category with id = " + id + " doesn't exists");
+        }
+        categories.remove(id);
+    }
+
+    @Override
+    public Category update(Category category) {
+        int index = (Collections.binarySearch(categories, category));
+        if (index < 0) {
+            return null;
+        }
+        categories.set(index, category);
+
+        return category;
+
+    }
+
+    public static CategoryDao getInstance() throws IOException {
+        if (instance == null) {
+            synchronized (CategoryDao.class) {
+                if (instance == null) {
+                    instance = new TemporaryCategoryDao();
+                }
+            }
+        }
+        return instance;
+    }
+}
