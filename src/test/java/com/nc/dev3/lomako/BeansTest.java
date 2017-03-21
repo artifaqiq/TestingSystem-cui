@@ -3,7 +3,7 @@ package com.nc.dev3.lomako;
 import com.nc.dev3.lomako.beans.category.Category;
 import com.nc.dev3.lomako.beans.test.TestAnswers;
 import com.nc.dev3.lomako.utils.BeansCreator;
-import com.nc.dev3.lomako.utils.TestResultCalculator;
+import com.nc.dev3.lomako.utils.strategy.ResultCalculationStrategyCreator;
 import junit.framework.TestCase;
 
 /**
@@ -15,7 +15,7 @@ public class BeansTest extends TestCase {
 
     public void testCategory() {
         Category category = beansCreator.createExampleCategory();
-        System.out.println(category);
+        System.out.println(category.getTests().get(0));
         System.out.println("Number of Test entity: " + category.getTests().get(0).numberOfEntities);
     }
 
@@ -26,7 +26,11 @@ public class BeansTest extends TestCase {
 
     public void testTestResultCalculator() {
         TestAnswers answers = beansCreator.createExampleTestAnswers();
-        assertTrue(TestResultCalculator.calculateTestResult(answers) == 100);
-        assertTrue(TestResultCalculator.calculateMaxTestResult(answers.getTest()) == 300);
+        assertTrue(ResultCalculationStrategyCreator.create(
+                answers.getTest().getResultCalculationStrategyWay())
+                .calculateResult(answers.getTest(), answers) == 100);
+        assertTrue(ResultCalculationStrategyCreator.create(
+                answers.getTest().getResultCalculationStrategyWay())
+                .calculateMaxResult(answers.getTest()) == 300);
     }
 }

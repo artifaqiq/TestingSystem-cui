@@ -3,8 +3,7 @@ package com.nc.dev3.lomako.utils;
 import com.nc.dev3.lomako.beans.answer.Answer;
 import com.nc.dev3.lomako.beans.answer.AnswerOption;
 import com.nc.dev3.lomako.beans.category.Category;
-import com.nc.dev3.lomako.beans.strategy.ScaledResultCalculatingStrategy;
-import com.nc.dev3.lomako.beans.strategy.StrictResultCalculatingStrategy;
+import com.nc.dev3.lomako.enums.ResultCalculationStrategyWays;
 import com.nc.dev3.lomako.beans.task.Task;
 import com.nc.dev3.lomako.beans.test.Test;
 import com.nc.dev3.lomako.beans.test.TestAnswers;
@@ -83,13 +82,13 @@ public class BeansCreator {
                 "Чуть-чуть о программировании",
                 "Тут описание должно быть",
                 tasks1,
-                new StrictResultCalculatingStrategy()));
+                ResultCalculationStrategyWays.STRICT));
 
         tests.add(new Test(
                 "Чуть-чуть о бд",
                 "Нужно пояснить о базах данных",
                 tasks2,
-                new ScaledResultCalculatingStrategy()));
+                ResultCalculationStrategyWays.SCALED));
 
         category.setName("Категория обо всем");
         category.setTests(tests);
