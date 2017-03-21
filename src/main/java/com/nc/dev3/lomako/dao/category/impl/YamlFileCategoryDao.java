@@ -1,5 +1,6 @@
 package com.nc.dev3.lomako.dao.category.impl;
 
+import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.nc.dev3.lomako.beans.test.Test;
 import com.nc.dev3.lomako.beans.answer.AnswerOption;
 import com.nc.dev3.lomako.beans.category.Category;
@@ -27,6 +28,19 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             + File.separator
             + FILE_PATH);
 
+    private static final Map<Class, String> YAML_CONFIG = new HashMap<>();
+
+    static {
+        YAML_CONFIG.put(Category.class, "category");
+        YAML_CONFIG.put(Test.class, "test");
+        YAML_CONFIG.put(Task.class, "task");
+        YAML_CONFIG.put(AnswerOption.class, "option");
+        YAML_CONFIG.put(ScaledResultCalculatingStrategy.class, "scaled");
+        YAML_CONFIG.put(StrictResultCalculatingStrategy.class, "strict");
+        YAML_CONFIG.put(GregorianCalendar.class, "date");
+
+    }
+
     private YamlFileCategoryDao() throws IOException {
         if (!file.exists()) {
 
@@ -46,6 +60,17 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             List<Category> emptyList = new ArrayList<>();
             saveAll(emptyList);
         }
+    }
+
+    private void updateYamlConfig(YamlConfig config) {
+
+        config.setClassTag(YAML_CONFIG.get(Test.class), Test.class);
+        config.setClassTag(YAML_CONFIG.get(Task.class), Task.class);
+        config.setClassTag(YAML_CONFIG.get(AnswerOption.class), AnswerOption.class);
+        config.setClassTag(YAML_CONFIG.get(ScaledResultCalculatingStrategy.class), ScaledResultCalculatingStrategy.class);
+        config.setClassTag(YAML_CONFIG.get(StrictResultCalculatingStrategy.class), StrictResultCalculatingStrategy.class);
+        config.setClassTag(YAML_CONFIG.get(Category.class), Category.class);
+        config.setClassTag(YAML_CONFIG.get(GregorianCalendar.class), GregorianCalendar.class);
     }
 
     @Override
@@ -85,16 +110,7 @@ public final class YamlFileCategoryDao implements Dao<Category> {
 
         try {
             reader = new YamlReader(new FileReader(file));
-
-            reader.getConfig().setClassTag("test", Test.class);
-            reader.getConfig().setClassTag("task", Task.class);
-            reader.getConfig().setClassTag("option", AnswerOption.class);
-            reader.getConfig().setClassTag("scaled", ScaledResultCalculatingStrategy.class);
-            reader.getConfig().setClassTag("strict", StrictResultCalculatingStrategy.class);
-            reader.getConfig().setClassTag("category", Category.class);
-            reader.getConfig().setClassTag("date", GregorianCalendar.class);
-            reader.getConfig().setClassTag("integer", Integer.class);
-
+            updateYamlConfig(reader.getConfig());
             categories = (List<Category>) reader.read(List.class);
 
         } catch (Exception e) {
@@ -143,18 +159,10 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             Collections.sort(categories);
 
             YamlWriter writer = new YamlWriter(new FileWriter(file));
-            writer.getConfig().setClassTag("test", Test.class);
-            writer.getConfig().setClassTag("task", Task.class);
-            writer.getConfig().setClassTag("option", AnswerOption.class);
-            writer.getConfig().setClassTag("scaled", ScaledResultCalculatingStrategy.class);
-            writer.getConfig().setClassTag("strict", StrictResultCalculatingStrategy.class);
-            writer.getConfig().setClassTag("category", Category.class);
-            writer.getConfig().setClassTag("date", GregorianCalendar.class);
-            writer.getConfig().setClassTag("integer", Integer.class);
+            updateYamlConfig(writer.getConfig());
 
             writer.write(categories);
             writer.close();
-
 
         } catch (Exception e) {
             e.printStackTrace();
