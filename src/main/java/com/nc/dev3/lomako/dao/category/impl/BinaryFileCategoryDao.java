@@ -1,7 +1,7 @@
 package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
-import com.nc.dev3.lomako.dao.category.CategoryDao;
+import com.nc.dev3.lomako.dao.Dao;
 import com.nc.dev3.lomako.dao.exceptions.NoFindEntityException;
 import com.nc.dev3.lomako.utils.Logger;
 
@@ -13,9 +13,9 @@ import java.util.List;
 /**
  * Created by arturlomako on 3/18/17.
  */
-public final class BinaryFileCategoryDao implements CategoryDao {
+public final class BinaryFileCategoryDao implements Dao<Category> {
 
-    private static volatile CategoryDao instance;
+    private static volatile Dao<Category> instance;
 
     private static final String DIR_PATH = "data_source";
     private static final String FILE_PATH = "categories.bin";
@@ -130,9 +130,9 @@ public final class BinaryFileCategoryDao implements CategoryDao {
         }
     }
 
-    public static CategoryDao getInstance() throws IOException {
+    public static Dao<Category> getInstance() throws IOException {
         if (instance == null) {
-            synchronized (CategoryDao.class) {
+            synchronized (BinaryFileCategoryDao.class) {
                 if (instance == null) {
                     instance = new BinaryFileCategoryDao();
                 }

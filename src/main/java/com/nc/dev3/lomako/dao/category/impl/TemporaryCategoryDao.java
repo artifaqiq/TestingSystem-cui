@@ -1,7 +1,7 @@
 package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
-import com.nc.dev3.lomako.dao.category.CategoryDao;
+import com.nc.dev3.lomako.dao.Dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
 /**
  * Created by arturlomako on 3/18/17.
  */
-public final class TemporaryCategoryDao implements CategoryDao {
+public final class TemporaryCategoryDao implements Dao<Category> {
 
-    private static volatile CategoryDao instance;
+    private static volatile Dao<Category> instance;
     private List<Category> categories = new ArrayList<>();
 
     private TemporaryCategoryDao() {
@@ -68,9 +68,9 @@ public final class TemporaryCategoryDao implements CategoryDao {
 
     }
 
-    public static CategoryDao getInstance() throws IOException {
+    public static Dao<Category> getInstance() throws IOException {
         if (instance == null) {
-            synchronized (CategoryDao.class) {
+            synchronized (TemporaryCategoryDao.class) {
                 if (instance == null) {
                     instance = new TemporaryCategoryDao();
                 }

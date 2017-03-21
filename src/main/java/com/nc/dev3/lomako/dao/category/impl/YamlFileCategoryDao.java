@@ -8,7 +8,7 @@ import com.nc.dev3.lomako.beans.strategy.StrictResultCalculatingStrategy;
 import com.nc.dev3.lomako.beans.task.Task;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
-import com.nc.dev3.lomako.dao.category.CategoryDao;
+import com.nc.dev3.lomako.dao.Dao;
 import com.nc.dev3.lomako.dao.exceptions.UniqueIdentifierException;
 
 import java.io.*;
@@ -17,9 +17,9 @@ import java.util.*;
 /**
  * Created by arturlomako on 3/18/17.
  */
-public final class YamlFileCategoryDao implements CategoryDao {
+public final class YamlFileCategoryDao implements Dao<Category> {
 
-    private static volatile CategoryDao instance;
+    private static volatile Dao<Category> instance;
 
     private static final String DIR_PATH = "data_source";
     private static final String FILE_PATH = "categories.yml";
@@ -170,9 +170,9 @@ public final class YamlFileCategoryDao implements CategoryDao {
         return false;
     }
 
-    public static CategoryDao getInstance() throws IOException {
+    public static Dao<Category> getInstance() throws IOException {
         if (instance == null) {
-            synchronized (CategoryDao.class) {
+            synchronized (YamlFileCategoryDao.class) {
                 if (instance == null) {
                     instance = new YamlFileCategoryDao();
                 }
