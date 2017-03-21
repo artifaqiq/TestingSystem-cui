@@ -1,7 +1,7 @@
 package com.nc.dev3.lomako.beans.test;
 
-import com.nc.dev3.lomako.beans.strategy.ResultCalculationStrategy;
 import com.nc.dev3.lomako.beans.task.Task;
+import com.nc.dev3.lomako.enums.ResultCalculationStrategyWays;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
@@ -13,34 +13,34 @@ import java.util.List;
 public class Test implements Serializable {
 
     public static int numberOfEntities = 0;
-
     private static final long serialVersionUID = -5965469173441798469L;
 
     private String name;
     private String description;
     private List<Task> tasks;
-    private ResultCalculationStrategy resultCalculationStrategy;
+    private ResultCalculationStrategyWays resultCalculationStrategyWay;
     private GregorianCalendar createdDate = new GregorianCalendar();
 
     public Test() {
         Test.numberOfEntities++;
     }
 
-    public Test(String name, String description, List<Task> tasks, ResultCalculationStrategy strategy) {
-        Test.numberOfEntities++;
+    public Test(String name, String description, List<Task> tasks,
+                ResultCalculationStrategyWays resultCalculationStrategyWay) {
+        numberOfEntities++;
 
         this.name = name;
         this.description = description;
         this.tasks = tasks;
-        this.resultCalculationStrategy = strategy;
+        this.resultCalculationStrategyWay = resultCalculationStrategyWay;
     }
 
-    public ResultCalculationStrategy getResultCalculationStrategy() {
-        return resultCalculationStrategy;
+    public ResultCalculationStrategyWays getResultCalculationStrategyWay() {
+        return resultCalculationStrategyWay;
     }
 
-    public void setResultCalculationStrategy(ResultCalculationStrategy resultCalculationStrategy) {
-        this.resultCalculationStrategy = resultCalculationStrategy;
+    public void setResultCalculationStrategyWay(ResultCalculationStrategyWays resultCalculationStrategyWay) {
+        this.resultCalculationStrategyWay = resultCalculationStrategyWay;
     }
 
     public GregorianCalendar getCreatedDate() {
@@ -81,8 +81,7 @@ public class Test implements Serializable {
         if (name != null ? !name.equals(test.name) : test.name != null) return false;
         if (description != null ? !description.equals(test.description) : test.description != null) return false;
         if (tasks != null ? !tasks.equals(test.tasks) : test.tasks != null) return false;
-        if (resultCalculationStrategy != null ? !resultCalculationStrategy.equals(test.resultCalculationStrategy) : test.resultCalculationStrategy != null)
-            return false;
+        if (resultCalculationStrategyWay != test.resultCalculationStrategyWay) return false;
         return createdDate != null ? createdDate.equals(test.createdDate) : test.createdDate == null;
     }
 
@@ -91,7 +90,7 @@ public class Test implements Serializable {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
-        result = 31 * result + (resultCalculationStrategy != null ? resultCalculationStrategy.hashCode() : 0);
+        result = 31 * result + (resultCalculationStrategyWay != null ? resultCalculationStrategyWay.hashCode() : 0);
         result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
         return result;
     }
@@ -102,7 +101,7 @@ public class Test implements Serializable {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", tasks=" + tasks +
-                ", resultCalculationStrategy=" + resultCalculationStrategy +
+                ", resultCalculationStrategyWay=" + resultCalculationStrategyWay +
                 ", createdDate=" + createdDate +
                 '}';
     }
