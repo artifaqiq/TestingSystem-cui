@@ -1,7 +1,7 @@
-package com.nc.dev3.lomako.dao.category;
+package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
-import com.nc.dev3.lomako.comparator.category.CategoryByNameComparator;
+import com.nc.dev3.lomako.dao.category.CategoryDao;
 
 import java.io.IOException;
 import java.util.ArrayList;

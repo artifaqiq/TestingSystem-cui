@@ -1,4 +1,4 @@
-package com.nc.dev3.lomako.dao.category;
+package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.test.Test;
 import com.nc.dev3.lomako.beans.answer.AnswerOption;
@@ -8,6 +8,7 @@ import com.nc.dev3.lomako.beans.strategy.StrictResultCalculatingStrategy;
 import com.nc.dev3.lomako.beans.task.Task;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
+import com.nc.dev3.lomako.dao.category.CategoryDao;
 import com.nc.dev3.lomako.dao.exceptions.UniqueIdentifierException;
 
 import java.io.*;

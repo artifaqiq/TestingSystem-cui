@@ -1,6 +1,7 @@
-package com.nc.dev3.lomako.dao.category;
+package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
+import com.nc.dev3.lomako.dao.category.CategoryDao;
 import com.nc.dev3.lomako.dao.exceptions.NoFindEntityException;
 import com.nc.dev3.lomako.utils.Logger;
 
