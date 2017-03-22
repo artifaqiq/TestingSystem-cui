@@ -133,7 +133,6 @@ public final class BinaryFileCategoryDao implements Dao<Category> {
         }
 
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
-            System.out.println(categories);
             outputStream.writeObject(categories);
         } catch (Exception e) {
             e.printStackTrace();

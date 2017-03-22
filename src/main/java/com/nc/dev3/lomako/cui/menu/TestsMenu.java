@@ -72,7 +72,7 @@ public final class TestsMenu extends Menu {
             writer.println("В данной категории пока нету тестов");
         } else {
             writer.println("  Тесты");
-            writer.println("  -----1");
+            writer.println("  ------");
 
             for (int i = 0; i < tests.size(); i++) {
                 writer.printf("%d. %s\n", i + 1, tests.get(0).getName());
