@@ -1,0 +1,15 @@
+com.nc.dev3.lomako
+com.nc.dev3.lomako.beans.answer
+com.nc.dev3.lomako.beans.category
+com.nc.dev3.lomako.beans.task
+com.nc.dev3.lomako.beans.test
+com.nc.dev3.lomako.comparator.category
+com.nc.dev3.lomako.cui.menu
+com.nc.dev3.lomako.cui.utils
+com.nc.dev3.lomako.dao
+com.nc.dev3.lomako.dao.category.impl
+com.nc.dev3.lomako.dao.exceptions
+com.nc.dev3.lomako.enums
+com.nc.dev3.lomako.utils
+com.nc.dev3.lomako.utils.strategy
+com.nc.dev3.lomako.utils.strategy.impl
