@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
@@ -10,9 +13,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
- * Created by arturlomako on 3/18/17.
- */
+ * Implementation {@code Dao} for category entities.
+ * Use binary file as data storage.
+ *
+ * @see Dao
+ *
+ * @author lomako
+ * @version 1.0
+ * */
 public final class BinaryFileCategoryDao implements Dao<Category> {
 
     private static volatile Dao<Category> instance;
@@ -97,12 +107,12 @@ public final class BinaryFileCategoryDao implements Dao<Category> {
     }
 
     @Override
-    public Category update(Category category) {
+    public Category update(Category category) throws NoFindEntityException{
         List<Category> all = findAll();
         int index = (Collections.binarySearch(all, category));
 
         if (index < 0) {
-            return null;
+            throw new NoFindEntityException("Category " + category + " doesn't exists");
         }
         all.set(index, category);
         saveAll(all);

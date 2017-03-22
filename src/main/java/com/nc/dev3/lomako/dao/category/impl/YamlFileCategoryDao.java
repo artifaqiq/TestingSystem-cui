@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.dao.category.impl;
 
 import com.esotericsoftware.yamlbeans.YamlConfig;
@@ -16,8 +19,14 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Created by arturlomako on 3/18/17.
- */
+ * Implementation {@code Dao} for category entities.
+ * Use Yaml-format file as data storage.
+ *
+ * @see Dao
+ *
+ * @author lomako
+ * @version 1.0
+ * */
 public final class YamlFileCategoryDao implements Dao<Category> {
 
     private static volatile Dao<Category> instance;

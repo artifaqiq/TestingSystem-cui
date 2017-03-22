@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.dao.category.impl;
 
 import com.nc.dev3.lomako.beans.category.Category;
@@ -10,8 +13,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Created by arturlomako on 3/18/17.
- */
+ * Implementation {@code Dao} for category entities.
+ * Use temporary memory structures as data storage.
+ * All data will be lost after program exit.
+ *
+ * @see Dao
+ *
+ * @author lomako
+ * @version 1.0
+ * */
 public final class TemporaryCategoryDao implements Dao<Category> {
 
     private static volatile Dao<Category> instance;
