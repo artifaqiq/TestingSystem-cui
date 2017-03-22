@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.beans.test;
 
 import com.nc.dev3.lomako.beans.task.Task;
@@ -8,11 +11,19 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- * Created by arturlomako on 3/18/17.
+ * This class describes entity <b>Test</b>
+ *
+ * @author lomako
+ * @version 1.0
+ * @see Test
  */
 public class Test implements Serializable {
 
+    /**
+     * This variable is counter of created instances of this class
+     * */
     public static int numberOfEntities = 0;
+
     private static final long serialVersionUID = -5965469173441798469L;
 
     private String name;
@@ -21,10 +32,23 @@ public class Test implements Serializable {
     private ResultCalculationStrategyWays resultCalculationStrategyWay;
     private GregorianCalendar createdDate = new GregorianCalendar();
 
+    /**
+     * Creates new entity of the class <b>{@code Test}</b>
+     */
     public Test() {
         Test.numberOfEntities++;
     }
 
+    /**
+     * Creates new entity of the class <b>{@code Test}</b>
+     *
+     * @param name name of test
+     * @param description descriptions of test
+     * @param tasks list of tasks that are in this test
+     * @param resultCalculationStrategyWay way to calculate test result
+     *                                     @see ResultCalculationStrategyWays
+     *
+     */
     public Test(String name, String description, List<Task> tasks,
                 ResultCalculationStrategyWays resultCalculationStrategyWay) {
         numberOfEntities++;
@@ -35,42 +59,81 @@ public class Test implements Serializable {
         this.resultCalculationStrategyWay = resultCalculationStrategyWay;
     }
 
+    /**
+     * @return way to calculate test result
+     *
+     * @see ResultCalculationStrategyWays
+     * */
     public ResultCalculationStrategyWays getResultCalculationStrategyWay() {
         return resultCalculationStrategyWay;
     }
 
+    /**
+     * @param resultCalculationStrategyWay way to calculate test result
+     *
+     * @see ResultCalculationStrategyWays
+     * */
     public void setResultCalculationStrategyWay(ResultCalculationStrategyWays resultCalculationStrategyWay) {
         this.resultCalculationStrategyWay = resultCalculationStrategyWay;
     }
 
+    /**
+     * @return date then entity was saved
+     * */
     public GregorianCalendar getCreatedDate() {
         return createdDate;
     }
 
+
+    /**
+     * @return list of tasks
+     * */
     public List<Task> getTasks() {
         return tasks;
     }
 
+
+    /**
+     * @param tasks list of tasks to set
+     * */
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+
+    /**
+     * @return name of test
+     * */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name name of c
+     * */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return description of test
+     * */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description description of test
+     * */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Test two tests to equals
+     *
+     *  @see Object#equals(Object)
+     * */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,6 +148,9 @@ public class Test implements Serializable {
         return createdDate != null ? createdDate.equals(test.createdDate) : test.createdDate == null;
     }
 
+    /**
+     * @see Object#hashCode()
+     * */
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
@@ -95,6 +161,11 @@ public class Test implements Serializable {
         return result;
     }
 
+    /**
+     * @return stringify {@code }
+     *
+     * @see Object#toString()
+     * */
     @Override
     public String toString() {
         return "Test{" +
