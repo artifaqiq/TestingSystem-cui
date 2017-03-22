@@ -33,6 +33,9 @@ public final class BinaryFileCategoryDao implements Dao<Category> {
             + File.separator
             + FILE_PATH);
 
+    private static final String CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE =
+            "Возникла проблема с доступом к файлу с базой данных. Обратитесь к администратору.";
+
 
     private BinaryFileCategoryDao() throws IOException {
 
@@ -129,13 +132,16 @@ public final class BinaryFileCategoryDao implements Dao<Category> {
                 throw new IOException(file.getAbsolutePath() + " can not be deleted");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE);
+            Logger.getInstance().log(e);
         }
 
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             outputStream.writeObject(categories);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        } catch (IOException e) {
+            System.err.println(CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE);
+            Logger.getInstance().log(e);
         }
     }
 

@@ -14,6 +14,7 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import com.nc.dev3.lomako.dao.Dao;
 import com.nc.dev3.lomako.dao.exceptions.UniqueIdentifierException;
+import com.nc.dev3.lomako.utils.Logger;
 
 import java.io.*;
 import java.util.*;
@@ -38,6 +39,8 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             + FILE_PATH);
 
     private static final Map<Class, String> YAML_CONFIG = new HashMap<>();
+    private static final String CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE =
+            "Возникла проблема с доступом к файлу с базой данных. Обратитесь к администратору.";
 
     static {
         YAML_CONFIG.put(Category.class, "category");
@@ -120,14 +123,16 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             updateYamlConfig(reader.getConfig());
             categories = (List<Category>) reader.read(List.class);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println(CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE);
+            Logger.getInstance().log(e);
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println(CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE);
+                    Logger.getInstance().log(e);
                 }
             }
         }
@@ -171,8 +176,9 @@ public final class YamlFileCategoryDao implements Dao<Category> {
             writer.write(categories);
             writer.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println(CRITICAL_STORAGE_FILES_PROBLEM_MESSAGE);
+            Logger.getInstance().log(e);
         }
     }
 
