@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.utils.strategy.impl;
 
 import com.nc.dev3.lomako.beans.answer.Answer;
@@ -5,14 +8,16 @@ import com.nc.dev3.lomako.beans.task.Task;
 import com.nc.dev3.lomako.beans.test.Test;
 import com.nc.dev3.lomako.beans.test.TestAnswers;
 import com.nc.dev3.lomako.utils.strategy.ResultCalculationStrategy;
-import com.nc.dev3.lomako.utils.strategy.ResultCalculationStrategyCreator;
 
-import java.io.Serializable;
 import java.util.ListIterator;
 
 /**
- * Created by arturlomako on 3/17/17.
- */
+ * Implementation {@code ResultCalculationStrategy}
+ * This strategy match {@link com.nc.dev3.lomako.enums.ResultCalculationStrategyWays#SCALED}
+ *
+ * @see ResultCalculationStrategy
+ * @see com.nc.dev3.lomako.enums.ResultCalculationStrategyWays#SCALED
+ * */
 public final class ScaledResultCalculatingStrategy implements ResultCalculationStrategy {
 
     @Override

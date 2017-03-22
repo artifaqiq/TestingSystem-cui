@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.utils.strategy;
 
 import com.nc.dev3.lomako.enums.ResultCalculationStrategyWays;
@@ -5,8 +8,9 @@ import com.nc.dev3.lomako.utils.strategy.impl.ScaledResultCalculatingStrategy;
 import com.nc.dev3.lomako.utils.strategy.impl.StrictResultCalculatingStrategy;
 
 /**
- * Created by arturlomako on 3/21/17.
- */
+ * This factory create instances of {@link ResultCalculationStrategy}
+ * in dependence on {@link ResultCalculationStrategyWays}
+ * */
 public final class ResultCalculationStrategyCreator {
     public static ResultCalculationStrategy create(ResultCalculationStrategyWays way) {
         ResultCalculationStrategy strategy = null;

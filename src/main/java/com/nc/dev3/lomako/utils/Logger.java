@@ -1,12 +1,17 @@
+/**
+ * Copyright (c) 2017, Lomako. All rights reserved.
+ */
 package com.nc.dev3.lomako.utils;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
+
 /**
- * Created by arturlomako on 3/19/17.
- */
+ * This singleton write logs
+ * Default path to log file is ./log.txt
+ * */
 public final class Logger {
 
     private static Logger instance = new Logger();
